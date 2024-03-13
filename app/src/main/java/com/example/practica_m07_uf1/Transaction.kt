@@ -1,5 +1,6 @@
 package com.example.practica_m07_uf1
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 data class Transaction (@SerializedName("name") var name: String,

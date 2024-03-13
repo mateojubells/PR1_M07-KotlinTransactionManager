@@ -13,7 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var db: AppDatabase // lateinit sirve para que no falle
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -21,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         GlobalScope.launch {
+            db = AppDatabase.getInstance(applicationContext)!!// obtenemos instancia de la bbdd
             val Transactions = getRetrofit()
+
+            db.TransactionDAO().insert(Transactiondb( "asdas", 12 , "asd", ""));
 
             MainScope().launch {
                 val adapter = Adapter(Transactions)
