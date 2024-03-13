@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             val Transactions = getRetrofit()
 
             MainScope().launch {
-                val adapter = MyAdapter(Transactions)
+                val adapter = Adapter(Transactions)
                 recyclerView.adapter = adapter
             }
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private  fun getRetrofit(): List<Transaction> {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/mateojubells/Transaction/db")
+            .baseUrl("https://my-json-server.typicode.com/mateojubells/Transaction/db/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

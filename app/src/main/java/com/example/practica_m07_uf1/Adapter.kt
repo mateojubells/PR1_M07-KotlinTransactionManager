@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.practica_m07_uf1.Transaction
 
-class MyAdapter(private val itemList: List<Transaction>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class Adapter(private val itemList: List<Transaction>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.nameTextView)
