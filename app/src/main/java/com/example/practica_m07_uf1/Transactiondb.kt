@@ -12,4 +12,3 @@ data class Transactiondb (
     @ColumnInfo(name = "date") var date: String?,
     @ColumnInfo(name = "type") var type: String?,
 )
-C:\Users\mateo\OneDrive - La Salle Catalunya\DAM -2\M07\PracticaM07\app
