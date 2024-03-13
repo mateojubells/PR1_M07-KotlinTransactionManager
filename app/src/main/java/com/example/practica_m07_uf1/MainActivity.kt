@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private  fun getRetrofit(): List<Transaction> {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/mateojubells/Transaction/db/")
+            .baseUrl("https://my-json-server.typicode.com/mateojubells/transaction/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

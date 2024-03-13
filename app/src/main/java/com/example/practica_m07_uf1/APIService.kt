@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface APIService {
-    @GET("Transaction")
+    @GET("transactions")
     fun getTransactions(): Call<List<Transaction>>
 }
 
