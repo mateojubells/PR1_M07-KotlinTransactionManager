@@ -17,5 +17,5 @@ interface TransactionDAO {
     fun loadAll(): List<Transactiondb>
 
     @Delete
-    fun deleteTransactions(transaction: Transaction)
+    fun deleteTransactions(transaction: Transactiondb)
 }
