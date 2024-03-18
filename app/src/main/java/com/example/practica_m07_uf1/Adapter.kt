@@ -1,10 +1,12 @@
-package com.example.practica_m07_uf1
+package com.example.database_api
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practica_m07_uf1.R
+import com.example.practica_m07_uf1.Transaction
 
 
 class Adapter(private val itemList: List<Transaction>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
