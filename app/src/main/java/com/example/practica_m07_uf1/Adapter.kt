@@ -9,7 +9,7 @@ import com.example.practica_m07_uf1.R
 import com.example.practica_m07_uf1.Transaction
 
 
-class Adapter(private val itemList: List<Transaction>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
+class Adapter(private var itemList: List<Transaction>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.nameTextView)
@@ -20,6 +20,10 @@ class Adapter(private val itemList: List<Transaction>) : RecyclerView.Adapter<Ad
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.transactions, parent, false)
         return MyViewHolder(itemView)
+    }
+    fun setData(newTransactions: List<Transaction>) {
+        itemList = newTransactions
+        notifyDataSetChanged()
     }
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val transaction = itemList[position]

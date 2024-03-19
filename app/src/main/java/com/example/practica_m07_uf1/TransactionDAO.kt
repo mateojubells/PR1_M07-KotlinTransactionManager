@@ -10,7 +10,7 @@ interface TransactionDAO {
     @Insert
     fun insert(transaction: Transactiondb)
 
-    @Query("SELECT * FROM `Transactiondb` WHERE name = :name")
+    @Query("SELECT * FROM `Transactiondb` WHERE name LIKE '%' || :name || '%'")
     fun loadAllTransactions(name: String): List<Transactiondb>
 
     @Query("SELECT * FROM `Transactiondb`")
