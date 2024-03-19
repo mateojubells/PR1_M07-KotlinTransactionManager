@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 
             val transactions = response.body() ?: emptyList()
 
-            // Insertar cada transacción en la base de datos
             transactions.forEach { transaction ->
                 val transactiondb = Transactiondb(
                     uId = null,
