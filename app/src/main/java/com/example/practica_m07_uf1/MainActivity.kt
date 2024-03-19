@@ -1,12 +1,18 @@
 package com.example.practica_m07_uf1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.util.Log
+import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.database_api.Adapter
 import com.example.database_api.Transactiondb
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
@@ -23,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        val myButton: FloatingActionButton = findViewById(R.id.fabAddTransaction)
+        myButton.setOnClickListener {
+            val fragment = AddTransactionFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -30,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             db = AppDatabase.getInstance(applicationContext)!!
 
             val transactions = db.TransactionDAO().loadAll()
+
 
             if (transactions.isEmpty()) {
                 val remoteTransactions = getRetrofit()
@@ -86,5 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
         return transactions
     }
-
+    fun reload(){
+   //     transactions = db.TransactionDAO().loadAll()
+    }
 }
