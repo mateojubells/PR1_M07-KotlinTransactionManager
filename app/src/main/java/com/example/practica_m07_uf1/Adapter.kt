@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practica_m07_uf1.DetallesActivity
 import com.example.practica_m07_uf1.R
 import com.example.practica_m07_uf1.Transaction
 
 
 class Adapter(private var itemList: List<Transaction>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.transactions, parent, false)
         return MyViewHolder(itemView)
     }
@@ -30,7 +31,7 @@ class Adapter(private var itemList: List<Transaction>) : RecyclerView.Adapter<Ad
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(transaction: Transaction, itemList: List<Transaction>){
             val item: ConstraintLayout = itemView.findViewById(R.id.item)
             val name: TextView = itemView.findViewById(R.id.nameTextView)
