@@ -12,7 +12,7 @@ class EditTransaction : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragmentContainerView3, DetallesFragment.newInstance(transaction))
+            .add(R.id.fragmentContainerView3, EditTransactionFragment.newInstance(transaction))
             .commit()
     }
 }

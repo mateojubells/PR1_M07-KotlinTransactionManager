@@ -1,5 +1,6 @@
 package com.example.practica_m07_uf1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.example.database_api.Transactiondb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,7 +63,7 @@ class EditTransactionFragment : Fragment() {
             name.setText(transaction!!.name)
             amount.setText(transaction!!.amount.toString())
             date.setText(transaction!!.date)
-            type.setText(transaction!!.date)
+            type.setText(transaction!!.type)
 
         }
         button.setOnClickListener {
@@ -73,7 +75,8 @@ class EditTransactionFragment : Fragment() {
             }
 
             Toast.makeText(context, "Transacción editada", Toast.LENGTH_SHORT).show()
-            requireActivity().onBackPressed()
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -88,7 +91,7 @@ class EditTransactionFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: Transaction?) =
             EditTransactionFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)

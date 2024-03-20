@@ -49,11 +49,10 @@ class Adapter(private var itemList: List<Transaction>) : RecyclerView.Adapter<Ad
                 itemView.context.startActivity(intent)
             }
 
-            // Quitamos el listener del item para evitar que se abra DetallesActivity al hacer clic en el botón de edición
-            // item.setOnClickListener{
-            //     val intent = Intent(itemView.context, DetallesActivity::class.java)
-            //     intent.putExtra("TRANSACTION", transaction)
-            //     itemView.context.startActivity(intent)
-            // }
+            item.setOnClickListener{
+                val intent = Intent(itemView.context, DetallesActivity::class.java)
+                intent.putExtra("TRANSACTION", transaction)
+                itemView.context.startActivity(intent)
+            }
         }
     }}
