@@ -124,12 +124,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun convertToTransactions(transactiondbs: List<Transactiondb>): List<Transaction> {
         val transactions = mutableListOf<Transaction>()
+        var valor = 0
+
         transactiondbs.forEach { transactiondb ->
+            valor += 1
             val transaction = Transaction(
                 name = transactiondb.name ?: "",
                 amount = transactiondb.amount,
                 date = transactiondb.date ?: "",
-                type = transactiondb.type ?: ""
+                type = transactiondb.type ?: "",
+                id = transactiondb.uId?: valor
             )
             transactions.add(transaction)
         }

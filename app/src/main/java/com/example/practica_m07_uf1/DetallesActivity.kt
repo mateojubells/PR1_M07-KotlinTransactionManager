@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import java.io.Serializable
 
 class DetallesActivity : AppCompatActivity() {
@@ -20,5 +21,13 @@ class DetallesActivity : AppCompatActivity() {
                 .beginTransaction()
                 .add(R.id.fragmentContainerView, DetallesFragment.newInstance(transaction))
                 .commit()
+
+        val back = findViewById<ImageButton>(R.id.imageButton)
+
+        back.setOnClickListener {
+            finish()
+        }
+
     }
+
 }

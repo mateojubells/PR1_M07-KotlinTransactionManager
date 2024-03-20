@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface TransactionDAO {
@@ -18,4 +19,7 @@ interface TransactionDAO {
 
     @Delete
     fun deleteTransactions(transaction: Transactiondb)
+
+    @Update
+    fun updateTransaction(transaction: Transactiondb)
 }
