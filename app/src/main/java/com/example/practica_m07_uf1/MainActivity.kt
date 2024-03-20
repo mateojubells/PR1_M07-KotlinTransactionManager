@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private suspend fun getRetrofit(): List<Transaction> {
         return withContext(Dispatchers.IO) {
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/mateojubells/transaction/")
+                .baseUrl("https://my-json-server.typicode.com/mateojubellsSalle/Transactions/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 

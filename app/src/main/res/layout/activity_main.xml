@@ -50,7 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:pointerIcon="copy"
-        android:src="@drawable/baseline_add_24"
         android:contentDescription="+"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
