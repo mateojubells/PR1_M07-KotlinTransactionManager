@@ -19,6 +19,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
@@ -29,39 +31,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val editTextSearch: EditText = findViewById(R.id.editTextSearch)
-        val buttonSearch: Button = findViewById(R.id.buttonSearch)
-
-        buttonSearch.setOnClickListener {
-            val searchText = editTextSearch.text.toString()
-            if (searchText.isNotEmpty()) {
-                searchTransactionsByName(searchText)
-                Log.i("","Se ha pulsado la busqueda")
-            }else{
-                GlobalScope.launch {
-                    db = AppDatabase.getInstance(applicationContext)!!
-
-                    val transactions = db.TransactionDAO().loadAll()
-
-                    withContext(Dispatchers.Main) {
-                        adapter = Adapter(convertToTransactions(transactions))
-                        recyclerView.adapter = adapter
-                    }
-                }
-            }
-        }
-        val myButton: FloatingActionButton = findViewById(R.id.fabAddTransaction)
-
-
-        myButton.setOnClickListener {
-            val fragment = AddTransactionFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -70,21 +39,85 @@ class MainActivity : AppCompatActivity() {
 
             val transactions = db.TransactionDAO().loadAll()
 
-            withContext(Dispatchers.Main) {
-                adapter = Adapter(convertToTransactions(transactions))
-                recyclerView.adapter = adapter
+            if (transactions.isEmpty()) {
+                val remoteTransactions = getRetrofit()
+                withContext(Dispatchers.Main) {
+                    adapter = Adapter(remoteTransactions)
+                    recyclerView.adapter = adapter
+                }
+            } else {
+                val transactionList = convertToTransactions(transactions)
+                withContext(Dispatchers.Main) {
+                    adapter = Adapter(transactionList)
+                    recyclerView.adapter = adapter
+                }
             }
+        }
+
+        val editTextSearch: EditText = findViewById(R.id.editTextSearch)
+        val buttonSearch: Button = findViewById(R.id.buttonSearch)
+
+        buttonSearch.setOnClickListener {
+            val searchText = editTextSearch.text.toString()
+            if (searchText.isNotEmpty()) {
+                searchTransactionsByName(searchText)
+                Log.i("", "Se ha pulsado la búsqueda")
+            } else {
+                GlobalScope.launch {
+                    db = AppDatabase.getInstance(applicationContext)!!
+                    val transactions = db.TransactionDAO().loadAll()
+                    withContext(Dispatchers.Main) {
+                        adapter.setData(convertToTransactions(transactions))
+                    }
+                }
+            }
+        }
+
+        val myButton: FloatingActionButton = findViewById(R.id.fabAddTransaction)
+
+        myButton.setOnClickListener {
+            val fragment = AddTransactionFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 
     private fun searchTransactionsByName(name: String) {
         GlobalScope.launch {
-
             val transactions = db.TransactionDAO().loadAllTransactions(name)
 
             withContext(Dispatchers.Main) {
                 adapter.setData(convertToTransactions(transactions))
             }
+        }
+    }
+
+    private suspend fun getRetrofit(): List<Transaction> {
+        return withContext(Dispatchers.IO) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://my-json-server.typicode.com/mateojubells/transaction/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(APIService::class.java)
+            val response = service.getTransactions().execute()
+
+            val transactions = response.body() ?: emptyList()
+
+            transactions.forEach { transaction ->
+                val transactiondb = Transactiondb(
+                    uId = null,
+                    name = transaction.name,
+                    amount = transaction.amount,
+                    date = transaction.date,
+                    type = transaction.type
+                )
+                db.TransactionDAO().insert(transactiondb)
+            }
+
+            return@withContext transactions
         }
     }
 
