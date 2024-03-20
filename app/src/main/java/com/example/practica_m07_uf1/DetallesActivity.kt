@@ -9,27 +9,16 @@ import android.widget.TextView
 import java.io.Serializable
 
 class DetallesActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId", "CutPasteId", "SetTextI18n")
+    @SuppressLint("MissingInflatedId", "CutPasteId", "SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles)
 
         val transaction: Transaction? = intent.getSerializableExtra("TRANSACTION") as? Transaction
 
-        val displayName = findViewById<TextView>(R.id.textView)
-        val displayAmount = findViewById<TextView>(R.id.textView2)
-
-        val displayDate = findViewById<TextView>(R.id.textViewDateDisplay)
-
-        val displayType = findViewById<TextView>(R.id.textViewTypeDisplay)
-
-        if (transaction != null) {
-            displayName.text = transaction.name
-            displayAmount.text = "${transaction.amount}€"
-            displayType.text = transaction.type
-            displayDate.text = transaction.date
-            // Set other details as needed
-        }
-
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainerView, DetallesFragment.newInstance(transaction))
+                .commit()
     }
 }
