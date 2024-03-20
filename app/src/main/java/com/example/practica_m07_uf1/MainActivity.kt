@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         return withContext(Dispatchers.IO) {
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/mateojubellsSalle/Transactions/")
+
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
