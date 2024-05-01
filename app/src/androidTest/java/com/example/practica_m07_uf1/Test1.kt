@@ -34,6 +34,7 @@ class Test1 {
         onView(withId(R.id.fabAddTransaction)).perform(click())
         onView(withId(R.id.fabAddTransaction)).check(matches(isDisplayed()))
     }
+
     @Test
     fun testOpenDetailsView() {
         Thread.sleep(2000) //Esperamos a que carguen los datos
@@ -41,5 +42,7 @@ class Test1 {
             .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fragmentContainerView)).check(matches(isDisplayed()))
     }
+
+
 }
 

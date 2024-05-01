@@ -1,28 +1,23 @@
 package com.example.practica_m07_uf1
 
-import androidx.fragment.app.FragmentManager
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.PositionAssertions.isBelow
-import androidx.test.espresso.assertion.PositionAssertions.isCompletelyAbove
 import androidx.test.espresso.assertion.PositionAssertions.isCompletelyBelow
-import androidx.test.espresso.assertion.PositionAssertions.isCompletelyLeftOf
 import androidx.test.espresso.assertion.PositionAssertions.isCompletelyRightOf
 import androidx.test.espresso.assertion.PositionAssertions.isLeftAlignedWith
-import androidx.test.espresso.assertion.PositionAssertions.isRightAlignedWith
-import androidx.test.espresso.assertion.PositionAssertions.isRightOf
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
+import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.PositionAssertions.isCompletelyAbove
+import org.hamcrest.Matchers.allOf
 import org.junit.Test
 
 class Test2(){
@@ -102,15 +97,12 @@ class Test2(){
             .check(matches(withText("Work Salary2")))
             .perform(click())
 
-
         //onView(withId(R.id.nameTextView)).perform(click())
-
 
         onView(withId(R.id.imageButton))
             .check(matches(isDisplayed()))
 
-        onView(withId(R.id.textView))
-            .check(matches(withText("Work Salary2")))
-
+        onView(allOf(withId(R.id.transactionName), isDescendantOfA(withId(R.id.fragmentContainerView))))
+            .check(isCompletelyAbove(withId(R.id.textView2)))
     }
 }

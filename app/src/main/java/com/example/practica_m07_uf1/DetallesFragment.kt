@@ -1,15 +1,12 @@
 package com.example.practica_m07_uf1
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +41,7 @@ class DetallesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val displayName = view.findViewById<TextView>(R.id.textView)
+        val displayName = view.findViewById<TextView>(R.id.transactionName)
         val displayAmount = view.findViewById<TextView>(R.id.textView2)
 
         val displayDate = view.findViewById<TextView>(R.id.textViewDateDisplay)

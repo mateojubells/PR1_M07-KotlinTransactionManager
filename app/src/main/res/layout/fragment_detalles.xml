@@ -23,7 +23,7 @@
             app:layout_constraintVertical_bias="0.15">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/transactionName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
@@ -41,6 +41,7 @@
         </LinearLayout>
 
         <TableLayout
+            android:id="@+id/table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
